@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITS Call Center Executive Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a2463, #3e5c76);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #a3c4f3;
+        }
+        
+        /* Login Page */
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .dashboard-container {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+        
+        .login-title {
+            color: #0a2463;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #0a2463;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #0a2463, #3e5c76);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #3e5c76, #0a2463);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(10, 36, 99, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, #28a745, #1e7e34);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(to right, #1e7e34, #155724);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-logout {
+            background: linear-gradient(to right, #dc3545, #c82333);
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+        
+        .btn-logout:hover {
+            background: linear-gradient(to right, #c82333, #bd2130);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        }
+        
+        /* Dashboard */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .executive-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .executive-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0a2463, #3e5c76);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .executive-details h3 {
+            color: #0a2463;
+            margin-bottom: 5px;
+        }
+        
+        .executive-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #0a2463;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0a2463;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .student-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaeaea;
+            margin-bottom: 25px;
+        }
+        
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .student-info h3 {
+            color: #0a2463;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .student-contact {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+        }
+        
+        .contact-item i {
+            color: #0a2463;
+        }
+        
+        .student-category {
+            background: #e9ecef;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+        
+        .call-form {
+            margin-top: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .call-notes {
+            margin-top: 10px;
+        }
+        
+        .call-notes textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .form-actions .btn {
+            flex: 1;
+        }
+        
+        .call-history {
+            margin-top: 40px;
+        }
+        
+        .history-title {
+            color: #0a2463;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .history-table th, .history-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .history-table th {
+            background-color: #f8f9fa;
+            color: #0a2463;
+            font-weight: 600;
+        }
+        
+        .history-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .category-diploma {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .category-school {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .category-parent {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .no-history {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-size: 1rem;
+        }
+        
+        .no-history i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .next-student-btn {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .next-student-btn .btn {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-new {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-followup {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .student-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .student-contact {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .history-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .login-container, .dashboard-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">BITS</div>
+                <div>
+                    <h1>Call Center Executive Portal</h1>
+                    <p>BITS Institute of Techniques and Skills</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="login-container" id="loginContainer">
+            <h2 class="login-title"><i class="fas fa-sign-in-alt"></i> Executive Login</h2>
+            
+            <div class="alert alert-error" id="loginError">
+                <i class="fas fa-exclamation-circle"></i> Invalid credentials. Please try again.
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="executiveId">Executive ID</label>
+                    <input type="text" id="executiveId" placeholder="Enter your executive ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-lock"></i> Login to Dashboard
+                </button>
+            </form>
+            
+            <div style="margin-top: 20px; text-align: center; color: #666; font-size: 0.9rem;">
+                <p><i class="fas fa-info-circle"></i> For demonstration: Use ID: <strong>EXEC001</strong> and Password: <strong>bits2024</strong></p>
+            </div>
+        </div>
+        
+        <!-- Dashboard -->
+        <div class="dashboard-container" id="dashboardContainer">
+            <div class="dashboard-header">
+                <div class="executive-info">
+                    <div class="executive-avatar" id="executiveAvatar">JD</div>
+                    <div class="executive-details">
+                        <h3 id="executiveName">John Doe</h3>
+                        <p id="executiveIdDisplay">Executive ID: EXEC001</p>
+                    </div>
+                </div>
+                
+                <button class="btn btn-logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCalls">0</div>
+                    <div class="stat-label">Total Calls Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="studentsContacted">0</div>
+                    <div class="stat-label">Students Contacted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingFollowups">0</div>
+                    <div class="stat-label">Pending Follow-ups</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completionRate">0%</div>
+                    <div class="stat-label">Completion Rate</div>
+                </div>
+            </div>
+            
+            <div class="alert alert-success" id="callSuccess">
+                <i class="fas fa-check-circle"></i> Call details submitted successfully! Moving to next student.
+            </div>
+            
+            <div class="student-card">
+                <div class="student-header">
+                    <div class="student-info">
+                        <h3 id="studentName">Rahul Sharma</h3>
+                        <div class="student-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span id="studentPhone">+91 98765 43210</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span id="studentEmail">rahul.sharma@example.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="student-category">
+                        <span id="studentCategory">Diploma Student</span>
+                    </div>
+                </div>
+                
+                <div class="student-details">
+                    <p><strong>Course Interested:</strong> <span id="studentCourse">Full Stack Web Development</span></p>
+                    <p><strong>Enquiry Date:</strong> <span id="enquiryDate">Sep 15, 2023</span></p>
+                    <p><strong>Status:</strong> <span class="status-badge status-new" id="studentStatus">New Enquiry</span></p>
+                    <p><strong>Previous Notes:</strong> <span id="previousNotes">No previous call notes available.</span></p>
+                </div>
+                
+                <div class="call-form">
+                    <h3 style="color: #0a2463; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-phone-volume"></i> Call Details
+                    </h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="callCategory">Student Category</label>
+                            <select id="callCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="diploma">Diploma Student</option>
+                                <option value="school">School Student</option>
+                                <option value="parent">Parent</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="callStatus">Call Status</label>
+                            <select id="callStatus" required>
+                                <option value="">Select Status</option>
+                                <option value="contacted">Successfully Contacted</option>
+                                <option value="no_answer">No Answer</option>
+                                <option value="busy">Busy</option>
+                                <option value="wrong_number">Wrong Number</option>
+                                <option value="callback">Callback Requested</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group call-notes">
+                        <label for="callNotes">Conversation Notes / What was discussed</label>
+                        <textarea id="callNotes" placeholder="Enter details of what was discussed with the student/parent. Include any questions asked, information provided, and next steps..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="followupDate">Follow-up Date (if required)</label>
+                        <input type="date" id="followupDate">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-success" id="submitCallBtn">
+                            <i class="fas fa-check"></i> Submit Call Details
+                        </button>
+                        <button type="button" class="btn" id="skipStudentBtn">
+                            <i class="fas fa-forward"></i> Skip to Next Student
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="next-student-btn">
+                <button class="btn" id="nextStudentBtn">
+                    <i class="fas fa-user-plus"></i> Get Next Student Contact
+                </button>
+            </div>
+            
+            <div class="call-history">
+                <h3 class="history-title"><i class="fas fa-history"></i> Today's Call History</h3>
+                
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Category</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="callHistoryBody">
+                        <!-- Call history will be populated here -->
+                    </tbody>
+                </table>
+                
+                <div id="noCallHistory" class="no-history">
+                    <i class="fas fa-clock"></i>
+                    <p>No calls logged yet today. Start calling students!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample executive data
+        const executives = [
+            {
+                id: "EXEC001",
+                password: "bits2024",
+                name: "John Doe",
+                avatar: "JD"
+            },
+            {
+                id: "EXEC002",
+                password: "bits2024",
+                name: "Sarah Johnson",
+                avatar: "SJ"
+            },
+            {
+                id: "EXEC003",
+                password: "bits2024",
+                name: "Michael Chen",
+                avatar: "MC"
+            }
+        ];
+
+        // Sample student data
+        const students = [
+            {
+                id: 1,
+                name: "Rahul Sharma",
+                phone: "+91 98765 43210",
+                email: "rahul.sharma@example.com",
+                course: "Full Stack Web Development",
+                enquiryDate: "Sep 15, 2023",
+                category: "diploma",
+                status: "new",
+                previousNotes: "No previous call notes available."
+            },
+            {
+                id: 2,
+                name: "Priya Patel",
+                phone: "+91 87654 32109",
+                email: "priya.patel@example.com",
+                course: "Data Science & Analytics",
+                enquiryDate: "Sep 18, 2023",
+                category: "school",
+                status: "followup",
+                previousNotes: "Interested in Data Science course. Asked about placement opportunities."
+            },
+            {
+                id: 3,
+                name: "Amit Kumar",
+                phone: "+91 76543 21098",
+                email: "amit.kumar@example.com",
+                course: "Digital Marketing",
+                enquiryDate: "Sep 20, 2023",
+                category: "diploma",
+                status: "new",
+                previousNotes: "No previous call notes available."
+            },
+            {
+                id: 4,
+                name: "Neha Gupta",
+                phone: "+91 65432 10987",
+                email: "neha.gupta@example.com",
+                course: "Graphic & UI/UX Design",
+                enquiryDate: "Sep 22, 2023",
+                category: "parent",
+                status: "followup",
+                previousNotes: "Parent called on behalf of daughter. Asked about course duration and fees."
+            },
+            {
+                id: 5,
+                name: "Vikram Singh",
+                phone: "+91 54321 09876",
+                email: "vikram.singh@example.com",
+                course: "Cyber Security",
+                enquiryDate: "Sep 25, 2023",
+                category: "diploma",
+                status: "new",
+                previousNotes: "No previous call notes available."
+            }
+        ];
+
+        // Application state
+        let currentExecutive = null;
+        let currentStudentIndex = 0;
+        let callHistory = [];
+        let todayCalls = 0;
+        let studentsContacted = 0;
+
+        // DOM elements
+        const loginContainer = document.getElementById('loginContainer');
+        const dashboardContainer = document.getElementById('dashboardContainer');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const submitCallBtn = document.getElementById('submitCallBtn');
+        const skipStudentBtn = document.getElementById('skipStudentBtn');
+        const nextStudentBtn = document.getElementById('nextStudentBtn');
+        const callSuccess = document.getElementById('callSuccess');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if already logged in (from localStorage)
+            const savedExecutive = localStorage.getItem('callCenterExecutive');
+            if (savedExecutive) {
+                currentExecutive = JSON.parse(savedExecutive);
+                showDashboard();
+            }
+
+            // Login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const executiveId = document.getElementById('executiveId').value;
+                const password = document.getElementById('password').value;
+                
+                // Validate credentials
+                const executive = executives.find(exec => exec.id === executiveId && exec.password === password);
+                
+                if (executive) {
+                    currentExecutive = executive;
+                    localStorage.setItem('callCenterExecutive', JSON.stringify(currentExecutive));
+                    showDashboard();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+
+            // Logout button
+            logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('callCenterExecutive');
+                currentExecutive = null;
+                showLogin();
+            });
+
+            // Submit call button
+            submitCallBtn.addEventListener('click', submitCallDetails);
+
+            // Skip student button
+            skipStudentBtn.addEventListener('click', function() {
+                nextStudent();
+            });
+
+            // Next student button
+            nextStudentBtn.addEventListener('click', function() {
+                nextStudent();
+            });
+        });
+
+        // Show login page
+        function showLogin() {
+            loginContainer.style.display = 'block';
+            dashboardContainer.style.display = 'none';
+            loginForm.reset();
+            loginError.style.display = 'none';
+        }
+
+        // Show dashboard
+        function showDashboard() {
+            loginContainer.style.display = 'none';
+            dashboardContainer.style.display = 'block';
+            
+            // Update executive info
+            document.getElementById('executiveName').textContent = currentExecutive.name;
+            document.getElementById('executiveIdDisplay').textContent = `Executive ID: ${currentExecutive.id}`;
+            document.getElementById('executiveAvatar').textContent = currentExecutive.avatar;
+            
+            // Load call history from localStorage
+            const savedHistory = localStorage.getItem(`callHistory_${currentExecutive.id}`);
+            if (savedHistory) {
+                callHistory = JSON.parse(savedHistory);
+            } else {
+                callHistory = [];
+            }
+            
+            // Calculate stats
+            calculateStats();
+            
+            // Load first student
+            loadCurrentStudent();
+            
+            // Update call history table
+            updateCallHistory();
+        }
+
+        // Load current student data
+        function loadCurrentStudent() {
+            if (currentStudentIndex >= students.length) {
+                currentStudentIndex = 0; // Reset to first student if we've reached the end
+            }
+            
+            const student = students[currentStudentIndex];
+            
+            // Update student info
+            document.getElementById('studentName').textContent = student.name;
+            document.getElementById('studentPhone').textContent = student.phone;
+            document.getElementById('studentEmail').textContent = student.email;
+            document.getElementById('studentCourse').textContent = student.course;
+            document.getElementById('enquiryDate').textContent = student.enquiryDate;
+            document.getElementById('previousNotes').textContent = student.previousNotes;
+            
+            // Update category
+            const categoryElement = document.getElementById('studentCategory');
+            let categoryText = '';
+            switch(student.category) {
+                case 'diploma':
+                    categoryText = 'Diploma Student';
+                    break;
+                case 'school':
+                    categoryText = 'School Student';
+                    break;
+                case 'parent':
+                    categoryText = 'Parent';
+                    break;
+                default:
+                    categoryText = 'Other';
+            }
+            categoryElement.textContent = categoryText;
+            
+            // Update status
+            const statusElement = document.getElementById('studentStatus');
+            statusElement.textContent = student.status === 'new' ? 'New Enquiry' : 'Follow-up Required';
+            statusElement.className = `status-badge status-${student.status}`;
+            
+            // Set default category in form
+            document.getElementById('callCategory').value = student.category;
+            
+            // Clear form
+            document.getElementById('callStatus').value = '';
+            document.getElementById('callNotes').value = '';
+            document.getElementById('followupDate').value = '';
+            
+            // Hide success message
+            callSuccess.style.display = 'none';
+        }
+
+        // Submit call details
+        function submitCallDetails() {
+            const callCategory = document.getElementById('callCategory').value;
+            const callStatus = document.getElementById('callStatus').value;
+            const callNotes = document.getElementById('callNotes').value;
+            const followupDate = document.getElementById('followupDate').value;
+            
+            // Validate form
+            if (!callCategory || !callStatus || !callNotes) {
+                alert('Please fill in all required fields: Category, Call Status, and Conversation Notes.');
+                return;
+            }
+            
+            const student = students[currentStudentIndex];
+            
+            // Create call record
+            const callRecord = {
+                id: Date.now(),
+                executiveId: currentExecutive.id,
+                executiveName: currentExecutive.name,
+                studentId: student.id,
+                studentName: student.name,
+                studentCategory: callCategory,
+                callStatus: callStatus,
+                callNotes: callNotes,
+                followupDate: followupDate,
+                timestamp: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+                date: new Date().toLocaleDateString('en-US')
+            };
+            
+            // Add to call history
+            callHistory.unshift(callRecord); // Add to beginning of array
+            
+            // Save to localStorage
+            localStorage.setItem(`callHistory_${currentExecutive.id}`, JSON.stringify(callHistory));
+            
+            // Update student status in our sample data (in real app, this would update database)
+            if (callStatus === 'contacted') {
+                students[currentStudentIndex].status = 'completed';
+            } else {
+                students[currentStudentIndex].status = 'followup';
+            }
+            
+            // Update previous notes for next time
+            students[currentStudentIndex].previousNotes = callNotes;
+            
+            // Update stats
+            todayCalls++;
+            if (callStatus === 'contacted') {
+                studentsContacted++;
+            }
+            
+            // Update UI
+            calculateStats();
+            updateCallHistory();
+            
+            // Show success message
+            callSuccess.style.display = 'block';
+            
+            // Move to next student after 2 seconds
+            setTimeout(() => {
+                nextStudent();
+            }, 2000);
+        }
+
+        // Move to next student
+        function nextStudent() {
+            currentStudentIndex++;
+            if (currentStudentIndex >= students.length) {
+                currentStudentIndex = 0;
+            }
+            loadCurrentStudent();
+        }
+
+        // Calculate and update statistics
+        function calculateStats() {
+            const totalCallsElement = document.getElementById('totalCalls');
+            const studentsContactedElement = document.getElementById('studentsContacted');
+            const pendingFollowupsElement = document.getElementById('pendingFollowups');
+            const completionRateElement = document.getElementById('completionRate');
+            
+            // Calculate stats from call history
+            const today = new Date().toLocaleDateString('en-US');
+            const todayCalls = callHistory.filter(call => call.date === today).length;
+            const contactedToday = callHistory.filter(call => call.date === today && call.callStatus === 'contacted').length;
+            const pendingToday = callHistory.filter(call => call.date === today && (call.callStatus === 'callback' || call.callStatus === 'no_answer')).length;
+            
+            const completionRate = todayCalls > 0 ? Math.round((contactedToday / todayCalls) * 100) : 0;
+            
+            // Update UI
+            totalCallsElement.textContent = todayCalls;
+            studentsContactedElement.textContent = contactedToday;
+            pendingFollowupsElement.textContent = pendingToday;
+            completionRateElement.textContent = `${completionRate}%`;
+        }
+
+        // Update call history table
+        function updateCallHistory() {
+            const callHistoryBody = document.getElementById('callHistoryBody');
+            const noCallHistory = document.getElementById('noCallHistory');
+            
+            // Clear table
+            callHistoryBody.innerHTML = '';
+            
+            if (callHistory.length === 0) {
+                noCallHistory.style.display = 'block';
+                return;
+            }
+            
+            noCallHistory.style.display = 'none';
+            
+            // Get today's calls
+            const today = new Date().toLocaleDateString('en-US');
+            const todayCalls = callHistory.filter(call => call.date === today);
+            
+            // Populate table with today's calls
+            todayCalls.forEach(call => {
+                const row = document.createElement('tr');
+                
+                // Determine category badge
+                let categoryClass = '';
+                let categoryText = '';
+                switch(call.studentCategory) {
+                    case 'diploma':
+                        categoryClass = 'category-diploma';
+                        categoryText = 'Diploma';
+                        break;
+                    case 'school':
+                        categoryClass = 'category-school';
+                        categoryText = 'School';
+                        break;
+                    case 'parent':
+                        categoryClass = 'category-parent';
+                        categoryText = 'Parent';
+                        break;
+                    default:
+                        categoryClass = '';
+                        categoryText = 'Other';
+                }
+                
+                // Truncate notes if too long
+                const shortNotes = call.callNotes.length > 50 
+                    ? call.callNotes.substring(0, 50) + '...' 
+                    : call.callNotes;
+                
+                row.innerHTML = `
+                    <td>${call.studentName}</td>
+                    <td><span class="category-badge ${categoryClass}">${categoryText}</span></td>
+                    <td>${call.timestamp}</td>
+                    <td>${call.callStatus}</td>
+                    <td title="${call.callNotes}">${shortNotes}</td>
+                `;
+                
+                callHistoryBody.appendChild(row);
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Only if dashboard is visible
+            if (dashboardContainer.style.display === 'block') {
+                // Ctrl + Enter to submit call
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    submitCallDetails();
+                }
+                
+                // Ctrl + N for next student
+                if (e.ctrlKey && e.key === 'n') {
+                    e.preventDefault();
+                    nextStudent();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Course Enquiry Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f9ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+            color: #4dabf7;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #4dabf7;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            color: #4dabf7;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 50px 0 30px;
+            background-color: white;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .form-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .form-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .form-card h3 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-card h3 i {
+            color: #4dabf7;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: #4dabf7;
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #4dabf7, #2c8bda);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #2c8bda, #1a6ca8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 139, 218, 0.3);
+        }
+        
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            width: auto;
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, #28a745, #1e7e34);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(to right, #1e7e34, #155724);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #4dabf7;
+            color: #4dabf7;
+        }
+        
+        .btn-outline:hover {
+            background: #4dabf7;
+            color: white;
+        }
+        
+        .verification-code {
+            background: linear-gradient(135deg, #4dabf7, #2c8bda);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            display: none;
+        }
+        
+        .admin-panel {
+            background-color: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 50px;
+            display: none;
+        }
+        
+        .admin-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-panel h3 i {
+            color: #4dabf7;
+        }
+        
+        .enquiries-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .enquiries-table th, .enquiries-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .enquiries-table th {
+            background-color: #f8fafc;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .enquiries-table tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .verification-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .verified {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .mismatch {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #4dabf7;
+            border-bottom: 3px solid #4dabf7;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+            font-size: 1.1rem;
+        }
+        
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .verification-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .verification-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+        }
+        
+        .code-match {
+            color: #28a745;
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .code-mismatch {
+            color: #dc3545;
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copyright {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .enquiries-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .verification-input {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Edu<span>Connect</span> Academy</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" data-tab="enquiry">Student Enquiry</a></li>
+                    <li><a href="#" class="nav-link" data-tab="admin">Admin Panel</a></li>
+                    <li><a href="#"><i class="fas fa-phone-alt"></i> Contact: +1 (555) 123-4567</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Explore Our Courses</h2>
+            <p>Fill out the enquiry form below to get information about our courses and receive a verification code for future reference.</p>
+        </section>
+
+        <div class="form-container">
+            <div class="form-card">
+                <h3><i class="fas fa-user-graduate"></i> Student Enquiry Form</h3>
+                <form id="enquiryForm">
+                    <div class="form-group">
+                        <label for="studentName">Full Name</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEmail">Email Address</label>
+                        <input type="email" id="studentEmail" placeholder="Enter your email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPhone">Phone Number</label>
+                        <input type="tel" id="studentPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseInterest">Course Interested In</label>
+                        <select id="courseInterest" required>
+                            <option value="">Select a course</option>
+                            <option value="web-development">Web Development</option>
+                            <option value="data-science">Data Science</option>
+                            <option value="digital-marketing">Digital Marketing</option>
+                            <option value="graphic-design">Graphic Design</option>
+                            <option value="business-management">Business Management</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Submit Enquiry & Get Verification Code
+                    </button>
+                </form>
+                
+                <div id="verificationCodeDisplay" class="verification-code">
+                    <p>Your verification code has been sent to your mobile!</p>
+                    <p>Code: <span id="verificationCode">ABCD1234</span></p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Please provide this code when you visit our center for verification.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verification Modal -->
+        <div class="modal" id="verificationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Verification</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Enter the verification code received from the student's mobile to verify their enquiry.</p>
+                    
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input type="text" id="modalStudentName" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Generated Verification Code</label>
+                        <input type="text" id="modalGeneratedCode" readonly style="background-color: #f0f8ff;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Code Received from Student Mobile</label>
+                        <div class="verification-input">
+                            <input type="text" id="modalReceivedCode" maxlength="8" placeholder="Enter 8-digit code">
+                            <button type="button" id="verifyCodeBtn" class="btn btn-sm btn-success">
+                                <i class="fas fa-check"></i> Verify
+                            </button>
+                        </div>
+                        <div id="codeComparisonResult"></div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 20px;">
+                        <button type="button" id="confirmVerificationBtn" class="btn btn-success" style="display: none;">
+                            <i class="fas fa-check-circle"></i> Confirm Verification
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-panel" id="adminPanel">
+            <h3><i class="fas fa-tachometer-alt"></i> Admin Panel - Enquiry Records</h3>
+            
+            <div class="tab-container">
+                <div class="tab active" data-tab="all">All Enquiries</div>
+                <div class="tab" data-tab="verified">Verified</div>
+                <div class="tab" data-tab="pending">Pending Verification</div>
+                <div class="tab" data-tab="mismatch">Code Mismatch</div>
+            </div>
+            
+            <div class="tab-content active" id="all-enquiries">
+                <table class="enquiries-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Generated Code</th>
+                            <th>Mobile Code</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enquiriesTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                <div id="noAllData" class="no-data">
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>No student enquiries found. Submit the form to see records here.</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="verified-enquiries">
+                <table class="enquiries-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Generated Code</th>
+                            <th>Mobile Code</th>
+                            <th>Verification Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="verifiedTableBody">
+                        <!-- Verified data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                <div id="noVerifiedData" class="no-data">
+                    <i class="fas fa-check-circle"></i>
+                    <p>No verified enquiries found.</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="pending-enquiries">
+                <table class="enquiries-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Generated Code</th>
+                            <th>Mobile Code</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pendingTableBody">
+                        <!-- Pending data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                <div id="noPendingData" class="no-data">
+                    <i class="fas fa-clock"></i>
+                    <p>No pending verification enquiries.</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="mismatch-enquiries">
+                <table class="enquiries-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Generated Code</th>
+                            <th>Mobile Code</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mismatchTableBody">
+                        <!-- Mismatch data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+                <div id="noMismatchData" class="no-data">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>No verification code mismatches found.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright">
+                <p>&copy; 2023 EduConnect Academy. All rights reserved.</p>
+            </div>
+            <div class="contact-info">
+                <div><i class="fas fa-envelope"></i> info@educonnect.edu</div>
+                <div><i class="fas fa-map-marker-alt"></i> 123 Education Street, Knowledge City</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate a random verification code
+        function generateVerificationCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        // Store enquiries in localStorage
+        let enquiries = JSON.parse(localStorage.getItem('studentEnquiries')) || [];
+
+        // DOM elements
+        const enquiryForm = document.getElementById('enquiryForm');
+        const verificationCodeDisplay = document.getElementById('verificationCodeDisplay');
+        const verificationCodeElement = document.getElementById('verificationCode');
+        const adminPanel = document.getElementById('adminPanel');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Modal elements
+        const verificationModal = document.getElementById('verificationModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const verifyCodeBtn = document.getElementById('verifyCodeBtn');
+        const confirmVerificationBtn = document.getElementById('confirmVerificationBtn');
+        const modalReceivedCode = document.getElementById('modalReceivedCode');
+        const modalGeneratedCode = document.getElementById('modalGeneratedCode');
+        const modalStudentName = document.getElementById('modalStudentName');
+        const codeComparisonResult = document.getElementById('codeComparisonResult');
+        
+        // Current verification context
+        let currentVerificationId = null;
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load existing enquiries
+            renderEnquiries();
+            
+            // Set up tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // Set up navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tab = this.getAttribute('data-tab');
+                    if (tab === 'admin') {
+                        showAdminPanel();
+                    } else {
+                        showEnquiryForm();
+                    }
+                });
+            });
+            
+            // Modal event listeners
+            closeModalBtn.addEventListener('click', function() {
+                verificationModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === verificationModal) {
+                    verificationModal.style.display = 'none';
+                }
+            });
+            
+            // Verify code button
+            verifyCodeBtn.addEventListener('click', function() {
+                compareVerificationCodes();
+            });
+            
+            // Confirm verification button
+            confirmVerificationBtn.addEventListener('click', function() {
+                verifyEnquiry(currentVerificationId, modalReceivedCode.value.toUpperCase());
+            });
+        });
+
+        // Handle form submission
+        enquiryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('studentName').value;
+            const email = document.getElementById('studentEmail').value;
+            const phone = document.getElementById('studentPhone').value;
+            const course = document.getElementById('courseInterest').value;
+            
+            // Generate verification code
+            const verificationCode = generateVerificationCode();
+            
+            // Create enquiry object
+            const enquiry = {
+                id: Date.now(),
+                name,
+                email,
+                phone,
+                course,
+                generatedCode: verificationCode,
+                mobileCode: '',
+                status: 'pending',
+                verificationDate: '',
+                date: new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                timestamp: new Date().getTime()
+            };
+            
+            // Add to enquiries array
+            enquiries.push(enquiry);
+            
+            // Save to localStorage
+            localStorage.setItem('studentEnquiries', JSON.stringify(enquiries));
+            
+            // Show verification code
+            verificationCodeElement.textContent = verificationCode;
+            verificationCodeDisplay.style.display = 'block';
+            
+            // Simulate sending code to mobile
+            simulateMobileNotification(phone, verificationCode);
+            
+            // Update admin panel if visible
+            renderEnquiries();
+            
+            // Reset form
+            enquiryForm.reset();
+            
+            // Show success message
+            alert(`Enquiry submitted successfully! Your verification code (${verificationCode}) has been sent to your mobile. Please provide this code when you visit our center.`);
+        });
+
+        // Simulate sending verification code to mobile
+        function simulateMobileNotification(phone, code) {
+            console.log(`SMS sent to ${phone}: Your verification code is ${code}. Use this code at EduConnect Academy for verification.`);
+            
+            // In a real application, you would integrate with an SMS API here
+            // For demo purposes, we'll just log it to console
+        }
+
+        // Show admin panel
+        function showAdminPanel() {
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.form-container').style.display = 'none';
+            adminPanel.style.display = 'block';
+            
+            // Update active nav link
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-tab') === 'admin') {
+                    link.style.color = '#4dabf7';
+                } else {
+                    link.style.color = 'white';
+                }
+            });
+        }
+
+        // Show enquiry form
+        function showEnquiryForm() {
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.form-container').style.display = 'flex';
+            adminPanel.style.display = 'none';
+            
+            // Update active nav link
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-tab') === 'enquiry') {
+                    link.style.color = '#4dabf7';
+                } else {
+                    link.style.color = 'white';
+                }
+            });
+        }
+
+        // Switch between tabs in admin panel
+        function switchTab(tabId) {
+            // Update active tab
+            tabs.forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Show corresponding tab content
+            tabContents.forEach(content => {
+                if (content.id === `${tabId}-enquiries`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Render appropriate data
+            renderEnquiries();
+        }
+
+        // Render enquiries in admin panel
+        function renderEnquiries() {
+            const allTableBody = document.getElementById('enquiriesTableBody');
+            const verifiedTableBody = document.getElementById('verifiedTableBody');
+            const pendingTableBody = document.getElementById('pendingTableBody');
+            const mismatchTableBody = document.getElementById('mismatchTableBody');
+            
+            // Clear tables
+            allTableBody.innerHTML = '';
+            verifiedTableBody.innerHTML = '';
+            pendingTableBody.innerHTML = '';
+            mismatchTableBody.innerHTML = '';
+            
+            // Show/hide no data messages
+            document.getElementById('noAllData').style.display = enquiries.length > 0 ? 'none' : 'block';
+            
+            // Sort enquiries by timestamp (newest first)
+            const sortedEnquiries = [...enquiries].sort((a, b) => b.timestamp - a.timestamp);
+            
+            // Separate enquiries by status
+            const verifiedEnquiries = sortedEnquiries.filter(e => e.status === 'verified');
+            const pendingEnquiries = sortedEnquiries.filter(e => e.status === 'pending');
+            const mismatchEnquiries = sortedEnquiries.filter(e => e.status === 'mismatch');
+            
+            document.getElementById('noVerifiedData').style.display = verifiedEnquiries.length > 0 ? 'none' : 'block';
+            document.getElementById('noPendingData').style.display = pendingEnquiries.length > 0 ? 'none' : 'block';
+            document.getElementById('noMismatchData').style.display = mismatchEnquiries.length > 0 ? 'none' : 'block';
+            
+            // Render all enquiries
+            sortedEnquiries.forEach(enquiry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${enquiry.name}</td>
+                    <td>${enquiry.email}</td>
+                    <td>${enquiry.phone}</td>
+                    <td>${getCourseName(enquiry.course)}</td>
+                    <td><strong>${enquiry.generatedCode}</strong></td>
+                    <td>${enquiry.mobileCode || 'Not provided'}</td>
+                    <td><span class="verification-status ${enquiry.status}">${getStatusText(enquiry.status)}</span></td>
+                    <td>
+                        ${enquiry.status === 'pending' || enquiry.status === 'mismatch' ? 
+                            `<button class="btn btn-sm btn-outline verify-modal-btn" data-id="${enquiry.id}">
+                                <i class="fas fa-mobile-alt"></i> Enter Mobile Code
+                            </button>` : 
+                            `<span>Verified on ${enquiry.verificationDate || enquiry.date}</span>`
+                        }
+                    </td>
+                `;
+                allTableBody.appendChild(row);
+            });
+            
+            // Render verified enquiries
+            verifiedEnquiries.forEach(enquiry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${enquiry.name}</td>
+                    <td>${enquiry.email}</td>
+                    <td>${enquiry.phone}</td>
+                    <td>${getCourseName(enquiry.course)}</td>
+                    <td>${enquiry.generatedCode}</td>
+                    <td>${enquiry.mobileCode}</td>
+                    <td>${enquiry.verificationDate || enquiry.date}</td>
+                `;
+                verifiedTableBody.appendChild(row);
+            });
+            
+            // Render pending enquiries
+            pendingEnquiries.forEach(enquiry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${enquiry.name}</td>
+                    <td>${enquiry.email}</td>
+                    <td>${enquiry.phone}</td>
+                    <td>${getCourseName(enquiry.course)}</td>
+                    <td><strong>${enquiry.generatedCode}</strong></td>
+                    <td>${enquiry.mobileCode || 'Not provided'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline verify-modal-btn" data-id="${enquiry.id}">
+                            <i class="fas fa-mobile-alt"></i> Enter Mobile Code
+                        </button>
+                    </td>
+                `;
+                pendingTableBody.appendChild(row);
+            });
+            
+            // Render mismatch enquiries
+            mismatchEnquiries.forEach(enquiry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${enquiry.name}</td>
+                    <td>${enquiry.email}</td>
+                    <td>${enquiry.phone}</td>
+                    <td>${getCourseName(enquiry.course)}</td>
+                    <td><strong>${enquiry.generatedCode}</strong></td>
+                    <td>${enquiry.mobileCode || 'Not provided'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline verify-modal-btn" data-id="${enquiry.id}">
+                            <i class="fas fa-redo"></i> Retry Verification
+                        </button>
+                    </td>
+                `;
+                mismatchTableBody.appendChild(row);
+            });
+            
+            // Add event listeners to verification buttons
+            document.querySelectorAll('.verify-modal-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    openVerificationModal(id);
+                });
+            });
+        }
+
+        // Open verification modal
+        function openVerificationModal(id) {
+            const enquiry = enquiries.find(e => e.id === id);
+            if (!enquiry) return;
+            
+            currentVerificationId = id;
+            modalStudentName.value = enquiry.name;
+            modalGeneratedCode.value = enquiry.generatedCode;
+            modalReceivedCode.value = enquiry.mobileCode || '';
+            codeComparisonResult.innerHTML = '';
+            confirmVerificationBtn.style.display = 'none';
+            
+            verificationModal.style.display = 'flex';
+            
+            // Focus on the input field
+            setTimeout(() => {
+                modalReceivedCode.focus();
+            }, 100);
+        }
+
+        // Compare verification codes
+        function compareVerificationCodes() {
+            const receivedCode = modalReceivedCode.value.trim().toUpperCase();
+            const generatedCode = modalGeneratedCode.value;
+            
+            if (!receivedCode) {
+                codeComparisonResult.innerHTML = '<div class="code-mismatch">Please enter the code received from student mobile</div>';
+                return;
+            }
+            
+            if (receivedCode.length !== 8) {
+                codeComparisonResult.innerHTML = '<div class="code-mismatch">Verification code must be 8 characters</div>';
+                return;
+            }
+            
+            if (receivedCode === generatedCode) {
+                codeComparisonResult.innerHTML = '<div class="code-match"><i class="fas fa-check-circle"></i> Codes match! Verification successful.</div>';
+                confirmVerificationBtn.style.display = 'block';
+            } else {
+                codeComparisonResult.innerHTML = '<div class="code-mismatch"><i class="fas fa-exclamation-triangle"></i> Codes do not match. Please check and try again.</div>';
+                confirmVerificationBtn.style.display = 'none';
+            }
+        }
+
+        // Verify an enquiry with mobile code
+        function verifyEnquiry(id, mobileCode) {
+            const enquiryIndex = enquiries.findIndex(e => e.id === id);
+            if (enquiryIndex === -1) return;
+            
+            const generatedCode = enquiries[enquiryIndex].generatedCode;
+            
+            if (mobileCode === generatedCode) {
+                // Codes match - verify the enquiry
+                enquiries[enquiryIndex].status = 'verified';
+                enquiries[enquiryIndex].mobileCode = mobileCode;
+                enquiries[enquiryIndex].verificationDate = new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                localStorage.setItem('studentEnquiries', JSON.stringify(enquiries));
+                
+                // Close modal and refresh
+                verificationModal.style.display = 'none';
+                renderEnquiries();
+                
+                // Show success message
+                alert(`Enquiry verified successfully for ${enquiries[enquiryIndex].name}`);
+            } else {
+                // Codes don't match
+                enquiries[enquiryIndex].status = 'mismatch';
+                enquiries[enquiryIndex].mobileCode = mobileCode;
+                localStorage.setItem('studentEnquiries', JSON.stringify(enquiries));
+                
+                // Refresh and show error
+                renderEnquiries();
+                alert(`Verification failed for ${enquiries[enquiryIndex].name}. The code received (${mobileCode}) doesn't match the generated code (${generatedCode}).`);
+            }
+        }
+
+        // Get status text
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'Pending',
+                'verified': 'Verified',
+                'mismatch': 'Code Mismatch'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Get course name from value
+        function getCourseName(courseValue) {
+            const courses = {
+                'web-development': 'Web Development',
+                'data-science': 'Data Science',
+                'digital-marketing': 'Digital Marketing',
+                'graphic-design': 'Graphic Design',
+                'business-management': 'Business Management'
+            };
+            return courses[courseValue] || courseValue;
+        }
+
+        // Sample data for initial display
+        if (enquiries.length === 0) {
+            const sampleEnquiries = [
+                {
+                    id: 1,
+                    name: 'John Smith',
+                    email: 'john.smith@example.com',
+                    phone: '+1 (555) 123-4567',
+                    course: 'web-development',
+                    generatedCode: 'X8F3G9H2',
+                    mobileCode: 'X8F3G9H2',
+                    status: 'verified',
+                    verificationDate: 'Sep 18, 2023, 10:30 AM',
+                    date: 'Sep 15, 2023, 2:15 PM',
+                    timestamp: new Date('2023-09-15').getTime()
+                },
+                {
+                    id: 2,
+                    name: 'Sarah Johnson',
+                    email: 'sarah.j@example.com',
+                    phone: '+1 (555) 987-6543',
+                    course: 'data-science',
+                    generatedCode: 'A5B6C7D8',
+                    mobileCode: '',
+                    status: 'pending',
+                    verificationDate: '',
+                    date: 'Sep 18, 2023, 9:45 AM',
+                    timestamp: new Date('2023-09-18').getTime()
+                },
+                {
+                    id: 3,
+                    name: 'Michael Chen',
+                    email: 'm.chen@example.com',
+                    phone: '+1 (555) 456-7890',
+                    course: 'graphic-design',
+                    generatedCode: 'M3N4O5P6',
+                    mobileCode: 'M3N4O5Q6',
+                    status: 'mismatch',
+                    verificationDate: '',
+                    date: 'Sep 10, 2023, 11:20 AM',
+                    timestamp: new Date('2023-09-10').getTime()
+                }
+            ];
+            
+            enquiries = sampleEnquiries;
+            localStorage.setItem('studentEnquiries', JSON.stringify(enquiries));
+            renderEnquiries();
+        }
+    </script>
+</body>
+</html>
