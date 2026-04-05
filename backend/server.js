@@ -19,11 +19,21 @@ const authRoutes = require('./modules/auth/auth.routes');
 const courseRoutes = require('./modules/courses/course.routes');
 const enquiryRoutes = require('./modules/enquiries/enquiry.routes');
 const executiveRoutes = require('./modules/executives/executive.routes');
+const agentRoutes = require('./modules/agents/agent.routes');
+const sessionRoutes = require('./modules/sessions/session.routes');
+const dropdownRoutes = require('./modules/dropdowns/dropdown.routes');
+const supervisorRoutes = require('./modules/supervisor/supervisor.routes');
+const reportsRoutes = require('./modules/reports/reports.routes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/executives', executiveRoutes);
+app.use('/api/agents', agentRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/dropdowns', dropdownRoutes);
+app.use('/api/supervisor', supervisorRoutes);
+app.use('/api/reports', reportsRoutes);
 
 // Database Connection
 const MONGODB_URI = config.MONGODB_URI;

@@ -1,5 +1,6 @@
 {
     "PORT": 5000,
     "MONGODB_URI": "mongodb://localhost:27017/bits-callcenter-dev",
-    "JWT_SECRET": "bits_secret_key_dev_2024"
+    "JWT_SECRET": "bits_jwt_secret_2024_secure_random_key_dev",
+    "ENCRYPTION_KEY": "bits_encryption_key_32_chars!!!!"
 }
